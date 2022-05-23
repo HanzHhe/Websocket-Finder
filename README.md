@@ -7,7 +7,7 @@ Websocket Finder adalah tool untuk mencari koneksi websocket ditulis dengan baha
 Untuk Menginstall Hanya Perlu Mengetik/Mengcopy:
 
 ```
-apt-get update && apt-get upgrade && apt-getinstall python git && git clone https://github.com/HanzHhe/Websocket-Finder && cd WebsockFind
+apt-get update && apt-get upgrade && apt-getinstall python git && git clone https://github.com/HanzHhe/Websocket-Finder && cd Websocket-Finder
 ```
 ## Cara Penggunaan
 
