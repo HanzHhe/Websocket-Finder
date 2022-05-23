@@ -1,6 +1,6 @@
 import socket, ssl, sys, warnings, os
-# from websocket im
-us = "Penggunaan: python ckws.py <FILE LIST SUBDOMAIN>"
+
+us = "Penggunaan: python wsfind.py <FILE LIST SUBDOMAIN>"
 warnings.simplefilter('ignore', category=DeprecationWarning)
 
 if len(sys.argv) == 1:
