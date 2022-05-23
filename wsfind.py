@@ -57,23 +57,25 @@ for dom in host.read().splitlines():
   sl.do_handshake_on_connect
   sl.settimeout(7)
   port = 443
-  sl.connect_ex((dom, port))
-  sl.getpeercert()
-  sl.context.load_default_certs()
-#  except:
-#    print(f"Host: {dom} Tidak Merespon")
-#  try:
-  sl.send(payload.encode())
-  data = sl.recv(1024).decode()
-  if '101 S' in data:
+  try:
+     sl.connect_ex((dom, port))
+     sl.getpeercert()
+     sl.context.load_default_certs()
+  except:
+     print(f"\033[1;31mHandshake Timeout")
+     pass
+  try:
+     sl.send(payload.encode())
+     data = sl.recv(1024).decode()
+     if '101 S' in data:
          print(f"\033[1;32mBug Ditemukan: {dom}\nSocket: {ip}:{port}\nSni: {dom}\n\033[0;0m")
          print(data)
          if 'Bug' in hsr.read():
            hsa.write(f"Bug: {dom}\nSocket: {ip}:{port}\nPayload: GET / HTTP/1.1[]Host: isi ssh klean[crlf]Upgrade: websocket[crlf][crlf]\n\nYNTKTS: {data}\n\n")
          else:
            hasil.write(f"Bug: {dom}\nSocket: {ip}:{port}\nPayload: GET / HTTP/1.1[crlf]Host: isi ssh klean[crlf]Upgrade: websocket[crlf][crlf]\nYNTKTS: {data}")
-  else:
+     else:
          print(f"\033[1;31mBug WSS Tidak Ditemukan Di Host: {dom}\nSocket: {ip}:{port}\n\033[0;0m")
          print(data)
-#  except:
-#      print(f"\033[1;31mHost SNI Dari: {dom} Tidak Ditemukan\n\033[0;0m")
+  except:
+     print(f"\033[1;31mHost SNI Dari: {dom} Tidak Ditemukan\n\033[0;0m")
